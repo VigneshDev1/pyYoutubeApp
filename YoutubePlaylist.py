@@ -3,6 +3,7 @@ import pickle  # module to save python objects as bytes and load later where req
 import csv
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import youtubeFunctions as yf
 from googleapiclient.discovery import build
 
 # region______________LOAD CREDENTIALS_________________________________
@@ -26,20 +27,15 @@ if not credentials or not credentials.valid:
         with open("token.pickle", "wb") as futureuse:
             pickle.dump(credentials, futureuse)
 
-
 # endregion __________________________________________________________
-
-
-
-# _____________
 myChannelID = '_______________'
 
 PlaylistFolder = "/Users/vignesh/Documents/CODE/Python/PYCHARM/pyYoutubeApp/Playlist_csv"
 
-# getYoutubeVideos(credentials, myChannelID)
-# updateYoutubePlaylist(credentials, PlaylistFolder)
+# yf.getYoutubeVideos(credentials, myChannelID)
+# yf.updateYoutubePlaylist(credentials, PlaylistFolder)
 
-AllPlayList = getPlayListIDs(credentials, myChannelID)
+AllPlayList = yf.getPlayListIDs(credentials, myChannelID)
 # print(AllPlayList)
 AllPlayList = {y: x for x, y in AllPlayList.items()}
 for file in os.listdir(PlaylistFolder):
@@ -51,7 +47,7 @@ for file in os.listdir(PlaylistFolder):
     VideoList = [VideoList[i][0] for i in range(len(VideoList))]
     VideoID = [vidID.split("https://www.youtube.com/watch?v=")[1]
                for vidID in VideoList]
-    AddVideotoList(credentials, AllPlayList[file[:-4]], VideoID)
+    yf.AddVideotoList(credentials, AllPlayList[file[:-4]], VideoID)
 
 # _____________________Sample for public data_______________________
 # API_KEY = ''
