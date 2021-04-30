@@ -3,7 +3,7 @@ import pickle  # module to save python objects as bytes and load later where req
 import csv
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-import youtubeFunctions as yf
+import YoutubeFunctions as yf
 from googleapiclient.discovery import build
 
 # region______________LOAD CREDENTIALS_________________________________
